@@ -23,6 +23,7 @@ jobs:
       
       - name: build-windows
         run: |
+          npm install -g pnpm
           pnpm install
           pnpm run electron:build
       

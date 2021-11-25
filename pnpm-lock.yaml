@@ -11,11 +11,13 @@ specifiers:
   electron-devtools-installer: ^3.1.0
   eslint: ^6.7.2
   eslint-plugin-vue: ^7.0.0
+  path: ^0.12.7
   vue: ^3.0.0
   vue-cli-plugin-electron-builder: ~2.1.1
 
 dependencies:
   core-js: 3.19.1
+  path: 0.12.7
   vue: 3.2.22
 
 devDependencies:
@@ -5769,7 +5771,6 @@ packages:
 
   /inherits/2.0.1:
     resolution: {integrity: sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE=, tarball: inherits/download/inherits-2.0.1.tgz}
-    dev: true
 
   /inherits/2.0.3:
     resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=, tarball: inherits/download/inherits-2.0.3.tgz}
@@ -6495,7 +6496,7 @@ packages:
     dev: true
 
   /loader-utils/2.0.2:
-    resolution: {integrity: sha1-1uO0+4GHByGuTghoqxHdY4NowSk=, tarball: loader-utils/download/loader-utils-2.0.2.tgz?cache=0&sync_timestamp=1636690676437&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Floader-utils%2Fdownload%2Floader-utils-2.0.2.tgz}
+    resolution: {integrity: sha1-1uO0+4GHByGuTghoqxHdY4NowSk=, tarball: loader-utils/download/loader-utils-2.0.2.tgz?cache=0&sync_timestamp=1636688923923&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Floader-utils%2Fdownload%2Floader-utils-2.0.2.tgz}
     engines: {node: '>=8.9.0'}
     dependencies:
       big.js: 5.2.2
@@ -7510,6 +7511,13 @@ packages:
       pify: 3.0.0
     dev: true
 
+  /path/0.12.7:
+    resolution: {integrity: sha1-1NwqUGxM4hl+tIHr/NWzbAFAsQ8=, tarball: path/download/path-0.12.7.tgz}
+    dependencies:
+      process: 0.11.10
+      util: 0.10.3
+    dev: false
+
   /pbkdf2/3.1.2:
     resolution: {integrity: sha1-3YIqoIh1gOUvGgOdw+2hCO+uMHU=, tarball: pbkdf2/download/pbkdf2-3.1.2.tgz}
     engines: {node: '>=0.12'}
@@ -7972,7 +7980,7 @@ packages:
     dev: true
 
   /prettier/2.4.1:
-    resolution: {integrity: sha1-Zx4RyJwUpM/Ids5WQQbEpnJsn1w=, tarball: prettier/download/prettier-2.4.1.tgz?cache=0&sync_timestamp=1632820947001&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fprettier%2Fdownload%2Fprettier-2.4.1.tgz}
+    resolution: {integrity: sha1-Zx4RyJwUpM/Ids5WQQbEpnJsn1w=, tarball: prettier/download/prettier-2.4.1.tgz}
     engines: {node: '>=10.13.0'}
     hasBin: true
     requiresBuild: true
@@ -7993,7 +8001,6 @@ packages:
   /process/0.11.10:
     resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=, tarball: process/download/process-0.11.10.tgz}
     engines: {node: '>= 0.6.0'}
-    dev: true
 
   /progress/2.0.3:
     resolution: {integrity: sha1-foz42PW48jnBvGi+tOt4Vn1XLvg=, tarball: progress/download/progress-2.0.3.tgz}
@@ -9766,7 +9773,6 @@ packages:
     resolution: {integrity: sha1-evsa/lCAUkZInj23/g7TeTNqwPk=, tarball: util/download/util-0.10.3.tgz}
     dependencies:
       inherits: 2.0.1
-    dev: true
 
   /util/0.11.1:
     resolution: {integrity: sha1-MjZzNyDsZLsn9uJvQhqqLhtYjWE=, tarball: util/download/util-0.11.1.tgz}

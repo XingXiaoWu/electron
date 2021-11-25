@@ -10,7 +10,7 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "build:win":"pnpm run electron:build -- --win nsis"
+    "build:win":"pnpm run electron:build -- --win nsis --publish never"
   },
   "main": "background.js",
   "dependencies": {

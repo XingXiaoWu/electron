@@ -35,7 +35,7 @@ jobs:
         with:
           name: packs
           path: |
-            *
+            ./dist_electron/*.exe
       # - name: push-page-to-branch-gh-pages
       #   env:
       #     TOKEN: ${{ secrets.pageToken }}

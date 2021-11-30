@@ -8,7 +8,7 @@ on:
 
 jobs:
   BuildForWin:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: checkout-main
@@ -20,13 +20,21 @@ jobs:
         with:
           node-version: '15.14.0'
           registry-url: 'https://registry.npmmirror.com/'
-      
-      - name: build-windows
+      - name: install pnpm
         run: |
           npm install -g pnpm
+      - name: pnpm install
+        run: |
           pnpm install
+      - name: build-windows
+        run: |
           pnpm run electron:build
-      
+      - name: Upload file
+        uses: actions/upload-artifact@v2
+        with:
+          name: packs
+          path: |
+            *
       # - name: push-page-to-branch-gh-pages
       #   env:
       #     TOKEN: ${{ secrets.pageToken }}

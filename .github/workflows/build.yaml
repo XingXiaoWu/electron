@@ -11,44 +11,32 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: checkout-main
-        uses: actions/checkout@v2
-        with:
-          ref: main
-      - name: install-nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: '15.14.0'
-          registry-url: 'https://registry.npmmirror.com/'
-      - name: install pnpm
-        uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.23.1
-      - name: pnpm install
+      - name: Hello World
         run: |
-          pnpm install
-      - name: build-windows
-        run: |
-          pnpm run electron:build
-      - name: Upload file
-        uses: actions/upload-artifact@v2
-        with:
-          name: packs
-          path: |
-            ./dist_electron/*.exe
-      # - name: push-page-to-branch-gh-pages
-      #   env:
-      #     TOKEN: ${{ secrets.pageToken }}
-      #     REF: github.com/${{github.repository}}
-      #     MYEMAIL: 329106954@qq.com 
-      #     MYNAME: ${{github.repository_owner}}
+          echo Hello World!
+
+      # - name: checkout-main
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: main
+      # - name: install-nodejs
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '15.14.0'
+      #     registry-url: 'https://registry.npmmirror.com/'
+      # - name: install pnpm
+      #   uses: pnpm/action-setup@v2.0.1
+      #   with:
+      #     version: 6.23.1
+      # - name: pnpm install
       #   run: |
-      #     cd page
-      #     git config --global user.email "${MYEMAIL}"   
-      #     git config --global user.name "${MYNAME}"   
-      #     git init  
-      #     git remote add origin https://${REF}
-      #     git add .
-      #     git commit -m "Updated By Github Actions With Build ${{github.run_number}} of ${{github.workflow}} For Github Pages"
-      #     git branch -M main
-      #     git push --force --quiet "https://${TOKEN}@${REF}" main:gh-pages
+      #     pnpm install
+      # - name: build-windows
+      #   run: |
+      #     pnpm run electron:build
+      # - name: Upload file
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: packs
+      #     path: |
+      #       ./dist_electron/*.exe

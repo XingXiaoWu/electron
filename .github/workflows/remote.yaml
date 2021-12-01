@@ -13,7 +13,7 @@ jobs:
       - name: Hello World
         run: |
           echo Hello World!
-          echo ${{ <context> }}
+          echo ${{ context }}
       # - name: checkout-main
       #   uses: actions/checkout@v2
       #   with:

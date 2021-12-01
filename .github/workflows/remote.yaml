@@ -13,7 +13,7 @@ jobs:
       - name: Hello World
         run: |
           echo Hello World!
-          echo ${{ github.event.client_payload }}
+          echo ${{ github.event.client_payload.hello }}
       # - name: checkout-main
       #   uses: actions/checkout@v2
       #   with:

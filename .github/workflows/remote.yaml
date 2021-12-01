@@ -3,7 +3,7 @@ name: 远程请求构建
 on:
   repository_dispatch:
     types:
-      - xingxiaowu
+      - 网页触发构建
 
 jobs:
   BuildForWin:

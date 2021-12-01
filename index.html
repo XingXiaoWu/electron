@@ -30,34 +30,8 @@
     </div>
 
     <script>
-        const App = {
-            data() {
-                return {
-                    url: ""
-                }
-            },
-            methods: {
-                submit() {
-                    axios({
-                        methods: 'post',
-                        url: 'https://api.github.com/repos/XingXiaoWu/electron/dispatches',
-                        headers: {
-                            'Accept':'application/vnd.github.everest-preview+json',
-                            'Authorization':'token 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',
-                        },
-                        data: {
-                            'event_type': "remotebuild",
-                            'client_payload':{
-                                'url': this.url
-                            }
-                        }
-                    })
-                }
-            }
-        }
-        const app = Vue.createApp(App)
-        app.use(ElementPlus);
-        app.mount('#app')
+        // 加密压缩
+        eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('2 6={3(){i{0:""}},5:{h(){f({5:\'g\',0:\'e://b.4.k/j/9/8/7\',a:{\'d\':\'c/l.4.w-v+u\',\'x\':\'A z\',},3:{\'y\':"t",\'o\':{\'0\':n.0}}})}}}2 1=m.p(6)1.s(r);1.q(\'#1\')',37,37,'url|app|const|data|github|methods|App|dispatches|electron|XingXiaoWu|headers|api|application|Accept|https|axios|post|submit|return|repos|com|vnd|Vue|this|client_payload|createApp|mount|ElementPlus|use|remotebuild|json|preview|everest|Authorization|event_type|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|token'.split('|'),0,{}))
     </script>
 </body>
 

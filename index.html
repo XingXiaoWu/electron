@@ -7,22 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>阿星的electron编译页面</title>
     <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <script src="//unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #app {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <p>{{ message }}</p>
+        <p>这里是阿星的electron测试页面</p>
+        <p>请在下方输入需要打包的客户端地址，例如:https://www.baidu.com</p>
+        <el-input v-model="url" placeholder="https://www.baidu.com"></el-input>
+        <el-button type="primary" @click="submit">确认提交</el-button>
     </div>
 
     <script>
-        const app = {
+        const App = {
             data() {
                 return {
-                    message: "提示"
+                    url: ""
+                }
+            },
+            methods: {
+                submit() {
+                    axios({
+                        methods: 'post',
+                        url: 'https://api.github.com/repos/XingXiaoWu/electron/dispatches',
+                        headers: {
+                            'Accept':'application/vnd.github.everest-preview+json',
+                            'Authorization':'token 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',
+                        },
+                        data: {
+                            'event_type': "网页触发构建",
+                            'client_payload':{
+                                
+                            }
+                        }
+                    })
                 }
             }
         }
-        Vue.createApp(app).mount('#app')
+        const app = Vue.createApp(App)
+        app.use(ElementPlus);
+        app.mount('#app')
     </script>
 </body>
 

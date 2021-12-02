@@ -42,7 +42,12 @@
             },
             methods: {
                 submit() {
-                    // 大哥们，看到这行注释，麻烦就不要用这个token了，给条活路
+                    // 大哥，都是干开发的，看到这行注释，麻烦就不要用这个token了，给条活路
+                    const site = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-\(\)]*[\w@?^=%&/~+#-\(\)])?$/
+                    if(!new RegExp(site).test(this.url)) {
+                        this.$message.error('地址不对,请输入正确的地址')
+                        return
+                    }
                     const tmp1 = 'ghp_MNG2Dzbzq1';
                     const tmp2 = 'iH6ya1lWeqRi9b'
                     const tmp3 = '0ktOOX1jKnyU';
@@ -61,9 +66,9 @@
                         }
                     }).then(() => {
                         this.build = true
-                        Message.success('请求构建成功')
+                        this.$message.success('请求发送成功')
                     }).catch(()=>{
-                        Message.error('构建失败，请联系329106954@qq.com查看原因')
+                        this.$message.error('构建失败，请联系329106954@qq.com查看原因')
                     })
                 }
             }

@@ -23,10 +23,12 @@
 
 <body>
     <div id="app">
-        <p>这里是阿星的electron测试页面</p>
+        <p>这里是阿星的electron构建测试页面</p>
+        <p>啥限制也没做，希望大佬们不要测试异常输入和频繁点击，谢谢</p>
         <p>请在下方输入需要打包的客户端地址，例如:https://www.baidu.com</p>
         <el-input v-model="url" placeholder="https://www.baidu.com"></el-input>
         <el-button type="primary" @click="submit">确认提交</el-button>
+        <a v-if="build" href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
     </div>
 
     <script>
@@ -34,11 +36,13 @@
         const App = {
             data() {
                 return {
-                    url: ""
+                    url: "",
+                    build: false
                 }
             },
             methods: {
                 submit() {
+                    // 大哥们，看到这行注释，麻烦就不要用这个token了，给条活路
                     const tmp1 = 'ghp_MNG2Dzbzq1';
                     const tmp2 = 'iH6ya1lWeqRi9b'
                     const tmp3 = '0ktOOX1jKnyU';
@@ -55,6 +59,11 @@
                                 'url': this.url
                             }
                         }
+                    }).then(() => {
+                        this.build = true
+                        Message.success('请求构建成功')
+                    }).catch(()=>{
+                        Message.error('构建失败，请联系329106954@qq.com查看原因')
                     })
                 }
             }

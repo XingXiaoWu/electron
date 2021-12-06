@@ -4,7 +4,7 @@ name: BuildForWin
 on: 
   push:
     branches:
-    - main
+    - master
 
 jobs:
   BuildForWin:

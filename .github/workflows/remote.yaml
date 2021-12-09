@@ -29,6 +29,8 @@ jobs:
       - name: change website and name
         run: |
           sed  -i '' 's#VUE_APP_SITE=#VUE_APP_SITE=${{ github.event.client_payload.url }}#g' './.env'
+          sed  -i '' 's#VUE_APP_NAME=#VUE_APP_NAME=${{ github.event.client_payload.name }}#g' './.env'
+          sed  -i '' 's#VUE_APP_ID=#VUE_APP_ID=${{ github.event.client_payload.appid }}#g' './.env'
       - name: build-windows
         run: |
           pnpm run electron:build

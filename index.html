@@ -25,10 +25,20 @@
     <div id="app">
         <p>这里是阿星的electron构建测试页面</p>
         <p>啥限制也没做，希望大佬们不要测试异常输入和频繁点击，谢谢</p>
-        <p>请在下方输入需要打包的客户端地址，例如:https://www.baidu.com</p>
-        <el-input v-model="url" placeholder="https://www.baidu.com"></el-input>
+        <el-form ref="form" :model="form" label-width="180px">
+            <el-form-item label="客户端需要打包的url地址:">
+                <el-input v-model="form.url" placeholder="https://www.baidu.com"></el-input>
+            </el-form-item>
+            <el-form-item label="客户端名称:">
+                <el-input v-model="form.name" placeholder="XX助手"></el-input>
+            </el-form-item>
+            <el-form-item label="客户端appid:">
+                <el-input v-model="form.appid" placeholder="com.apple.aaa"></el-input>
+            </el-form-item>
+        </el-form>
         <el-button type="primary" @click="submit">确认提交</el-button>
         <a v-if="build" href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
+        <p v-if="build">其他需求可联系VX：329106954</p>
     </div>
 
     <script>
@@ -36,7 +46,11 @@
         const App = {
             data() {
                 return {
-                    url: "",
+                    form: {
+                        url: "",
+                        name: "",
+                        appid: ""
+                    },
                     build: false
                 }
             },
@@ -44,7 +58,7 @@
                 submit() {
                     // 大哥，都是干开发的，看到这行注释，麻烦就不要用这个token了，给条活路
                     const site = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-\(\)]*[\w@?^=%&/~+#-\(\)])?$/
-                    if(!new RegExp(site).test(this.url)) {
+                    if (!new RegExp(site).test(this.form.url)) {
                         this.$message.error('地址不对,请输入正确的地址')
                         return
                     }
@@ -61,13 +75,15 @@
                         data: {
                             'event_type': "remotebuild",
                             'client_payload': {
-                                'url': this.url
+                                'url': this.form.url,
+                                'name': this.form.name,
+                                'appid': this.form.appid
                             }
                         }
                     }).then(() => {
                         this.build = true
                         this.$message.success('请求发送成功')
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.$message.error('构建失败，请联系329106954@qq.com查看原因')
                     })
                 }

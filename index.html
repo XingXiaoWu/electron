@@ -43,7 +43,7 @@
             <el-button type="primary" v-loading="loading3" @click="loading3=true;submit('linuxbuild')">打linux包
             </el-button>
         </el-row>
-        <a v-if="build" href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
+        <a v-if="build"  target="_blank"  href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
         <p v-if="build">其他需求可联系VX：329106954</p>
     </div>
 

@@ -3,11 +3,11 @@ name: 远程请求构建
 on:
   repository_dispatch:
     types:
-      - remotebuild
+      - linuxbuild
 
 jobs:
   BuildForWin:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout-main
@@ -40,4 +40,4 @@ jobs:
           name: packs
           path: |
             ./.env
-            ./dist_electron/*.exe
+            ./dist_electron/*

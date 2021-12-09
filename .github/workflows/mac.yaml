@@ -1,0 +1,43 @@
+name: 远程请求构建
+
+on:
+  repository_dispatch:
+    types:
+      - macbuild
+
+jobs:
+  BuildForWin:
+    runs-on: macOS-latest
+
+    steps:
+      - name: checkout-main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: install-nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: '15.14.0'
+          registry-url: 'https://registry.npmmirror.com/'
+      - name: install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.1
+      - name: pnpm install
+        run: |
+          pnpm install
+      - name: change website and name
+        run: |
+          sed  -i '' 's#VUE_APP_SITE=#VUE_APP_SITE=${{ github.event.client_payload.url }}#g' './.env'
+          sed  -i '' 's#VUE_APP_NAME=#VUE_APP_NAME=${{ github.event.client_payload.name }}#g' './.env'
+          sed  -i '' 's#VUE_APP_ID=#VUE_APP_ID=${{ github.event.client_payload.appid }}#g' './.env'
+      - name: build-windows
+        run: |
+          pnpm run electron:build
+      - name: Upload file
+        uses: actions/upload-artifact@v2
+        with:
+          name: packs
+          path: |
+            ./.env
+            ./dist_electron/*.dmg

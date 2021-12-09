@@ -6,7 +6,7 @@ on:
       - macbuild
 
 jobs:
-  BuildForWin:
+  BuildForMac:
     runs-on: macOS-latest
 
     steps:

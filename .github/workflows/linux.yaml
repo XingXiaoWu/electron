@@ -40,4 +40,4 @@ jobs:
           name: packs
           path: |
             ./.env
-            ./dist_electron/*
+            ./dist_electron/*.AppImage

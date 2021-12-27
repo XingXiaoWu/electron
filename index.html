@@ -35,6 +35,9 @@
             <el-form-item label="客户端appid:">
                 <el-input v-model="form.appid" placeholder="com.apple.aaa"></el-input>
             </el-form-item>
+            <el-form-item label="接收应用程序的邮箱:">
+                <el-input v-model="form.mail" placeholder="xxx.qq.com"></el-input>
+            </el-form-item>
         </el-form>
         <el-row>
             <el-button type="primary" v-loading="loading1" @click="loading1=true;submit('windowsbuild')">打windows包
@@ -86,7 +89,8 @@
                             'client_payload': {
                                 'url': this.form.url,
                                 'name': this.form.name,
-                                'appid': this.form.appid
+                                'appid': this.form.appid,
+                                'mail': this.form.mail
                             }
                         }
                     }).then(() => {

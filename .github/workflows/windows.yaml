@@ -34,34 +34,34 @@ jobs:
       - name: build-windows
         run: |
           pnpm run electron:build
-      - name: RAR
-        run: |
-          Compress-Archive -CompressionLevel Optimal -Force -Path ./dist_electron/*.exe -DestinationPath ${{ github.event.client_payload.name }}.zip
-      # - name: Send mail
-      #   uses: dawidd6/action-send-mail@v3
-      #   with:
-      #     # Required mail server address:
-      #     server_address: smtp.qq.com
-      #     # Required mail server port:
-      #     server_port: 465
-      #     # Optional (recommended): mail server username:
-      #     username: ${{secrets.EMAILUSERNAME}}
-      #     # Optional (recommended) mail server password:
-      #     password: ${{secrets.EMAILPASSWORD1}}
-      #     # Required mail subject:
-      #     subject: 打包好的程序
-      #     # Required recipients' addresses:
-      #     to: ${{ github.event.client_payload.mail }}
-      #     # Required sender full name (address can be skipped):
-      #     from: Xing.Wu # <user@example.com>
-      #     # Optional whether this connection use TLS (default is true if server_port is 465)
-      #     secure: true
-      #     # Optional plain body:
-      #     body: 您好，您的应用已经打包成功，解压附件查看，如有其他需求可回复本邮件
-      #     # Optional unsigned/invalid certificates allowance:
-      #     ignore_cert: true
-      #     # Optional attachments:
-      #     attachments: ${{ github.event.client_payload.name }}.zip
+      # - name: RAR
+      #   run: |
+      #     Compress-Archive -CompressionLevel Optimal -Force -Path ./dist_electron/*.exe -DestinationPath ${{ github.event.client_payload.name }}.zip
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Required mail server address:
+          server_address: smtp.qq.com
+          # Required mail server port:
+          server_port: 465
+          # Optional (recommended): mail server username:
+          username: ${{secrets.EMAILUSERNAME}}
+          # Optional (recommended) mail server password:
+          password: ${{secrets.EMAILPASSWORD1}}
+          # Required mail subject:
+          subject: 打包好的程序
+          # Required recipients' addresses:
+          to: ${{ github.event.client_payload.mail }}
+          # Required sender full name (address can be skipped):
+          from: Xing.Wu # <user@example.com>
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional plain body:
+          body: 您好，您的应用已经打包成功，解压附件查看，如有其他需求可回复本邮件
+          # Optional unsigned/invalid certificates allowance:
+          ignore_cert: true
+          # Optional attachments:
+          # attachments: ${{ github.event.client_payload.name }}.zip
       - name: Upload file
         uses: actions/upload-artifact@v2
         with:

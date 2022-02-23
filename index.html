@@ -18,6 +18,7 @@
             align-items: center;
             justify-content: center;
         }
+        #tip{color:red;}
     </style>
 </head>
 
@@ -26,7 +27,7 @@
         <p>这里是阿星的electron构建测试页面</p>
         <p>啥限制也没做，希望大佬们不要测试异常输入和频繁点击，谢谢</p>
 
-        <p>所有选项都是必填项，记得填写，不然打包会挂(๑Ő௰Ő๑)</p>
+        <p id="tip">所有选项都是必填项，记得填写，不然打包会挂(๑Ő௰Ő๑)</p>
         <el-form ref="form" :model="form" label-width="180px">
             <el-form-item label="客户端需要打包的url地址:">
                 <el-input v-model="form.url" placeholder="https://www.baidu.com"></el-input>

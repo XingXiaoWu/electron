@@ -18,7 +18,10 @@
             align-items: center;
             justify-content: center;
         }
-        #tip{color:red;}
+
+        #tip {
+            color: red;
+        }
     </style>
 </head>
 
@@ -28,17 +31,17 @@
         <p>啥限制也没做，希望大佬们不要测试异常输入和频繁点击，谢谢</p>
 
         <p id="tip">所有选项都是必填项，记得填写，不然打包会挂(๑Ő௰Ő๑)</p>
-        <el-form ref="form" :model="form" label-width="180px">
-            <el-form-item label="客户端需要打包的url地址:">
+        <el-form ref="form" :model="form" label-width="200px">
+            <el-form-item required label="客户端需要打包的url地址:" prop="url">
                 <el-input v-model="form.url" placeholder="https://www.baidu.com"></el-input>
             </el-form-item>
-            <el-form-item label="客户端名称:">
+            <el-form-item required label="客户端名称:" prop="name">
                 <el-input v-model="form.name" placeholder="XX助手"></el-input>
             </el-form-item>
-            <el-form-item label="客户端appid:">
+            <el-form-item required label="客户端appid:" prop="appid">
                 <el-input v-model="form.appid" placeholder="com.apple.aaa"></el-input>
             </el-form-item>
-            <el-form-item label="接收应用程序的邮箱:">
+            <el-form-item required label="接收应用程序的邮箱:" prop="mail">
                 <el-input v-model="form.mail" placeholder="xxx.qq.com"></el-input>
             </el-form-item>
         </el-form>
@@ -49,7 +52,7 @@
             <el-button type="primary" v-loading="loading3" @click="loading3=true;submit('linuxbuild')">打linux包
             </el-button>
         </el-row>
-        <a v-if="build"  target="_blank"  href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
+        <a v-if="build" target="_blank" href="https://github.com/XingXiaoWu/electron/actions">点击前往查看构建进度</a>
         <p v-if="build">其他需求可联系VX：329106954</p>
     </div>
 
@@ -72,40 +75,54 @@
             methods: {
                 submit(buildType) {
                     // 大哥，都是干开发的，看到这行注释，麻烦就不要用这个token了，给条活路
-                    // const site = /^(((ht|f)tps?):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-\(\)]*[\w@?^=%&/~+#-\(\)])?$/
-                    // if (!new RegExp(site).test(this.form.url)) {
-                    //     this.$message.error('地址不对,请输入正确的地址')
-                    //     return
-                    // }
-                    const tmp1 = 'ghp_MNG2Dzbzq1';
-                    const tmp2 = 'iH6ya1lWeqRi9b'
-                    const tmp3 = '0ktOOX1jKnyU';
-                    axios({
-                        method: 'post',
-                        url: 'https://api.github.com/repos/XingXiaoWu/electron/dispatches',
-                        headers: {
-                            'Accept': 'application/vnd.github.everest-preview+json',
-                            'Authorization': 'token ' + tmp1 + tmp2 + tmp3,
-                        },
-                        data: {
-                            'event_type': buildType,
-                            'client_payload': {
-                                'url': this.form.url,
-                                'name': this.form.name,
-                                'appid': this.form.appid,
-                                'mail': this.form.mail
-                            }
-                        }
-                    }).then(() => {
-                        this.build = true
-                        this.$message.success('请求发送成功')
-                    }).catch(() => {
-                        this.$message.error('构建失败，请联系329106954@qq.com查看原因')
-                    }).finally(() => {
+                    const eamil = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    if (!new RegExp(eamil).test(this.form.mail)) {
                         this.loading1 = false
                         this.loading2 = false
                         this.loading3 = false
+                        this.$message.error('邮箱不对,请输入正确邮箱')
+                        return
+                    }
+                    this.$refs.form.validate((validate) => {
+                        if (!validate) {
+                            this.loading1 = false
+                            this.loading2 = false
+                            this.loading3 = false
+                            this.$message.error('请填写必填项')
+                            return
+                        }
+                        const tmp1 = 'ghp_MNG2Dzbzq1';
+                        const tmp2 = 'iH6ya1lWeqRi9b'
+                        const tmp3 = '0ktOOX1jKnyU';
+                        axios({
+                            method: 'post',
+                            url: 'https://api.github.com/repos/XingXiaoWu/electron/dispatches',
+                            headers: {
+                                'Accept': 'application/vnd.github.everest-preview+json',
+                                'Authorization': 'token ' + tmp1 + tmp2 + tmp3,
+                            },
+                            data: {
+                                'event_type': buildType,
+                                'client_payload': {
+                                    'url': this.form.url,
+                                    'name': this.form.name,
+                                    'appid': this.form.appid,
+                                    'mail': this.form.mail
+                                }
+                            }
+                        }).then(() => {
+                            this.build = true
+                            this.$message.success('请求发送成功')
+                        }).catch(() => {
+                            this.$message.error('构建失败，请联系329106954@qq.com查看原因')
+                        }).finally(() => {
+                            this.loading1 = false
+                            this.loading2 = false
+                            this.loading3 = false
+                        })
+
                     })
+
                 }
             }
         };
